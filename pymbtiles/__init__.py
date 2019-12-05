@@ -243,6 +243,39 @@ class MBtiles(object):
 
         return row[0]
 
+    def read_tile_grid_data(self, z, x, y):
+        """
+        Get a tile grid_data for z, x, y values
+
+        Parameters
+        ----------
+        z: int
+            zoom level
+        x: int
+            tile column
+        y: int
+            tile row
+
+        Returns
+        -------
+        tile grid_data in bytes.  None if no tile exists.
+        """
+
+        self._cursor.execute(
+            "SELECT key_json FROM grid_data "
+            "where zoom_level=? and tile_column=? and tile_row=? LIMIT 1",
+            (z, x, y),
+        )
+
+        row = self._cursor.fetchone()
+        if row is None:
+            return None
+
+        if IS_PY2:  # pragma: no cover
+            return str(row[0])
+
+        return row[0]
+
     def write_tile(self, z, x, y, data):
         """
         Add a tile to the mbtiles file.  Note: this is not as performant as

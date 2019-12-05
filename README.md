@@ -10,6 +10,8 @@ Provides a lighweight Python API for reading and writing mbtiles files.
 
 [Mabox mbtiles v1.1](https://github.com/mapbox/mbtiles-spec/blob/master/1.1/spec.md) allow you to store geographic data as rendered image tiles or as vector tiles, along with associated metadata.
 
+JayB added: read_tile_grid_data
+
 ## Installation
 
 ```
